@@ -1,43 +1,32 @@
-# angular-seed — the seed for AngularJS apps
+# graph-alg-viz - Visualizations of graph algorithms using D3.
 
-This project is an application skeleton for a typical [AngularJS](http://angularjs.org/) web app.
-You can use it to quickly bootstrap your angular webapp projects and dev environment for these
-projects.
+This project is an [AngularJS](http://angularjs.org/) application that displays visualizations of
+common graph algorithms using [D3][d3] (or rather, it soon will be). 
 
-The seed contains a sample AngularJS application and is preconfigured to install the Angular
-framework and a bunch of development and testing tools for instant web development gratification.
-
-The seed app doesn't do much, just shows how to wire two controllers and views together.
-
+This project was generated using the [AngularJS Seed Project][angular-seed] and portions of this 
+project's README are taken from that project's README.
 
 ## Getting Started
 
-To get you started you can simply clone the angular-seed repository and install the dependencies:
+To get you started you can simply clone the graph-alg-viz repository and install the dependencies:
 
 ### Prerequisites
 
-You need git to clone the angular-seed repository. You can get git from
+You need git to clone the graph-alg-viz repository. You can get git from
 [http://git-scm.com/](http://git-scm.com/).
 
-We also use a number of node.js tools to initialize and test angular-seed. You must have node.js and
-its package manager (npm) installed.  You can get them from [http://nodejs.org/](http://nodejs.org/).
+We also use a number of node.js tools to initialize and test graph-alg-viz. You must have node.js 
+and its package manager (npm) installed.  You can get them from 
+[http://nodejs.org/](http://nodejs.org/).
 
-### Clone angular-seed
+### Clone graph-alg-viz
 
-Clone the angular-seed repository using [git][git]:
+Clone the graph-alg-viz repository using [git][git]:
 
 ```
-git clone https://github.com/angular/angular-seed.git
-cd angular-seed
+git clone https://github.com/lockoff/graph-alg-viz.git
+cd graph-alg-viz
 ```
-
-If you just want to start a new project without the angular-seed commit history then you can do:
-
-```bash
-git clone --depth=1 https://github.com/angular/angular-seed.git <your-project-name>
-```
-
-The `depth=1` tells git to only pull down one commit worth of historical data.
 
 ### Install Dependencies
 
@@ -60,7 +49,7 @@ folders in your project.
 * `app/bower_components` - contains the angular framework files
 
 *Note that the `bower_components` folder would normally be installed in the root folder but
-angular-seed changes this location through the `.bowerrc` file.  Putting it in the app folder makes
+graph-alg-viz changes this location through the `.bowerrc` file.  Putting it in the app folder makes
 it easier to serve the files by a webserver.*
 
 ### Run the Application
@@ -73,8 +62,6 @@ npm start
 ```
 
 Now browse to the app at `http://localhost:8000/app/index.html`.
-
-
 
 ## Directory Layout
 
@@ -89,26 +76,18 @@ app/                    --> all of the source files for the application
       version-directive_test.js  --> version directive tests
       interpolate-filter.js      --> custom interpolation filter
       interpolate-filter_test.js --> interpolate filter tests
-  view1/                --> the view1 view template and logic
-    view1.html            --> the partial template
-    view1.js              --> the controller logic
-    view1_test.js         --> tests of the controller
-  view2/                --> the view2 view template and logic
-    view2.html            --> the partial template
-    view2.js              --> the controller logic
-    view2_test.js         --> tests of the controller
+  graph/                --> the graph view template and logic
+    graph.html            --> the partial template
+    graph.js              --> the controller logic
+    graph_test.js         --> tests of the controller
   app.js                --> main application module
   index.html            --> app layout file (the main html template file of the app)
 karma.conf.js         --> config file for running unit tests with Karma
 ```
 
-## Testing
+## Running Unit Tests
 
-There are two kinds of tests in the angular-seed application: Unit tests and End to End tests.
-
-### Running Unit Tests
-
-The angular-seed app comes preconfigured with unit tests. These are written in
+The graph-alg-viz app comes with unit tests. These are written in
 [Jasmine][jasmine], which we run with the [Karma Test Runner][karma]. We provide a Karma
 configuration file to run them.
 
@@ -134,11 +113,7 @@ predefined script to do this:
 npm run test-single-run
 ```
 
-## Updating Angular
-
-Previously we recommended that you merge in changes to angular-seed into your own fork of the project.
-Now that the angular framework library code and tools are acquired through package managers (npm and
-bower) you can use these tools instead to update the dependencies.
+## Updating Dependencies
 
 You can update the tool dependencies by running:
 
@@ -146,7 +121,8 @@ You can update the tool dependencies by running:
 npm update
 ```
 
-This will find the latest versions that match the version ranges specified in the `package.json` file.
+This will find the latest versions that match the version ranges specified in the `package.json` 
+file.
 
 You can update the Angular dependencies by running:
 
@@ -156,20 +132,15 @@ bower update
 
 This will find the latest versions that match the version ranges specified in the `bower.json` file.
 
-## Serving the Application Files
-
-While angular is client-side-only technology and it's possible to create angular webapps that
-don't require a backend server at all, we recommend serving the project files using a local
-webserver during development to avoid issues with security restrictions (sandbox) in browsers. The
-sandbox implementation varies between browsers, but quite often prevents things like cookies, xhr,
-etc to function properly when an html page is opened via `file://` scheme instead of `http://`.
+**Note that the package.json and bower.json files came from the angular-seed project and the version
+constraints specified in those files have not yet been reviewed.**
 
 
 ### Running the App during Development
 
-The angular-seed project comes preconfigured with a local development webserver.  It is a node.js
-tool called [http-server][http-server].  You can start this webserver with `npm start` but you may choose to
-install the tool globally:
+The graph-alg-viz project comes preconfigured with a local development webserver.  It is a node.js
+tool called [http-server][http-server].  You can start this webserver with `npm start` but you may 
+choose to install the tool globally:
 
 ```
 sudo npm install -g http-server
@@ -185,31 +156,19 @@ http-server -a localhost -p 8000
 Alternatively, you can choose to configure your own webserver, such as apache or nginx. Just
 configure your server to serve the files under the `app/` directory.
 
-
-### Running the App in Production
-
-This really depends on how complex your app is and the overall infrastructure of your system, but
-the general rule is that all you need in production are all the files under the `app/` directory.
-Everything else should be omitted.
-
-Angular apps are really just a bunch of static html, css and js files that just need to be hosted
-somewhere they can be accessed by browsers.
-
-If your Angular app is talking to the backend server via xhr or other means, you need to figure
-out what is the best way to host the static files to comply with the same origin policy if
-applicable. Usually this is done by hosting the files by the backend server or through
-reverse-proxying the backend server(s) and webserver(s).
-
-
 ## Contact
 
-For more information on AngularJS please check out http://angularjs.org/
+More information can be found through the [github project][graph-alg-viz] or the 
+[Queer Engineering][queer-eng] blog.
 
+[angular-seed]: https://github.com/angular/angular-seed
+[d3]: http://d3js.org/
 [git]: http://git-scm.com/
 [bower]: http://bower.io
 [npm]: https://www.npmjs.org/
 [node]: http://nodejs.org
 [jasmine]: http://jasmine.github.io
 [karma]: http://karma-runner.github.io
-[travis]: https://travis-ci.org/
 [http-server]: https://github.com/nodeapps/http-server
+[queer-eng]: http://queereng.com
+[graph-alg-viz]: https://github.com/lockoff/graph-alg-viz

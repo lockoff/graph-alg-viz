@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed",
+  "name": "graph-alg-viz",
   "private": true,
   "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "description": "Uses D3 to visualize graph algorithms.",
+  "repository": "https://github.com/lockoff/graph-alg-viz",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.3.1",
