@@ -10,7 +10,7 @@ angular.module('graphAlgViz.force-layout.force-layout-directive', [])
         .size([sideLength, sideLength])
         .nodes($scope.nodes)
         .links($scope.links)
-        .linkDistance(30)
+        .linkDistance(250)
         .charge(-60)
         .on("tick", tick);
 
@@ -33,11 +33,15 @@ angular.module('graphAlgViz.force-layout.force-layout-directive', [])
       }
 
       function update() {
+        console.log("Update has been called...");
         linkSelection = linkSelection.data($scope.links);
         linkSelection
           .enter()
           .insert("line", ".node")
           .attr("class", "link");
+        linkSelection
+          .exit()
+          .remove();
 
         nodeSelection = nodeSelection.data($scope.nodes);
         nodeSelection
@@ -46,12 +50,15 @@ angular.module('graphAlgViz.force-layout.force-layout-directive', [])
           .attr("class", "node")
           .attr("r", 5)
           .call(forceLayout.drag);
+        nodeSelection
+          .exit()
+          .remove();
 
         forceLayout.start();
       }
 
-      $scope.$watch('nodes', update);
-      $scope.$watch('links', update);
+      $scope.$watchCollection('nodes', update);
+      $scope.$watchCollection('links', update);
     };
 
     return {
