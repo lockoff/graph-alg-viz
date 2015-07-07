@@ -2,14 +2,18 @@
   <div class="page-header">
     <h1>Generating a random graph using Erdos-Renyi Model</h1>
 
-    <p>In this example we will draw the random graph G(n,p) for n=100 p=0.05. Expected num edges
-      247.5.</p>
+    <p>In this example we will draw the random graph G(n,p), where n is the number of nodes and
+    p is the probability, for each possible edge, of the edge being included in the graph.</p>
+    Number of Nodes (n): <input type="number" ng-model="n" min="10" max="100">
+    Probability (p): <input type="number" ng-model="p" min="0.01" max="1" step="0.01">
     <button ng-click="generateGraph()">Generate Graph</button>
+    <p>Expected Number of Edges: {{(1/2) * (n - 1) * n * p}}</p>
+
   </div>
   <force-layout-graph nodes="nodes"
                       links="links"
                       width="500"
                       height="500"
-                      linkDistance="100"
-                      charge="-60"/>
+                      linkDistance="150"
+                      charge="-100"/>
 </div>
