@@ -3,9 +3,14 @@
     <h1>Generating a random graph using Erdos-Renyi Model</h1>
 
     <p>In this example we will draw the random graph G(n,p) for n=100 p=0.05. Expected num edges
-    247.5.</p>
+      247.5.</p>
     <button ng-click="generateGraph()">Generate Graph</button>
     <p>{{numEdges === 0 ? "" : "Num Edges: " + numEdges}}</p>
   </div>
-  <force-layout-graph></force-layout-graph>
+  <force-layout-graph nodes="nodes"
+                      links="links"
+                      width="500"
+                      height="500"
+                      linkDistance="100"
+                      charge="-60"/>
 </div>
