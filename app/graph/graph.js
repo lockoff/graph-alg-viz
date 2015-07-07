@@ -23,4 +23,5 @@ angular.module('graphAlgViz.graph', ['ngRoute', 'graphAlgViz.graph-generation'])
     }
 
     $scope.generateGraph = generate;
+    $scope.isAnimationsPending = generator.isAnimationsPending
   }]);

@@ -6,7 +6,7 @@
     p is the probability, for each possible edge, of the edge being included in the graph.</p>
     Number of Nodes (n): <input type="number" ng-model="n" min="10" max="100">
     Probability (p): <input type="number" ng-model="p" min="0.01" max="1" step="0.01">
-    <button ng-click="generateGraph()">Generate Graph</button>
+    <button ng-click="generateGraph()" ng-disabled="isAnimationsPending()">Generate Graph</button>
     <p>Expected Number of Edges: {{(1/2) * (n - 1) * n * p}}</p>
 
   </div>

@@ -2,14 +2,23 @@
 
 angular.module('graphAlgViz.graph-generation', [])
 
-  .factory('generator', ['$timeout', function ($timeout) {
+  .factory('generator', ['$timeout', '$q', function ($timeout, $q) {
     return {
-      generate: generate
+      generate: generate,
+      isAnimationsPending: isAnimationsPending
     };
+
+    var animationsPendingPromise = undefined;
+    var animationsPending = false;
+
+    function isAnimationsPending() {
+      return animationsPending;
+    }
 
     function generate(nodes, links, n, p, animationInterval) {
       nodes.length = 0;
       links.length = 0;
+      animationsPending = true;
 
       // Add unlinked nodes to graph.
       for (var i = 0; i < n; i++) {
@@ -22,14 +31,18 @@ angular.module('graphAlgViz.graph-generation', [])
       }
 
       var numEdges = 0;
+      var animationPromises = [];
       for (var i = 0; i < n; i++) {
         for (var j = i + 1; j < n; j++) {
           if (Math.random() < p) {
             numEdges += 1;
-            $timeout(generateLink(i, j), animationInterval * numEdges);
+            animationPromises.push($timeout(generateLink(i, j), animationInterval * numEdges));
           }
         }
       }
+      $q.all(animationPromises).then(function() {
+        animationsPending = false;
+      });
       console.log("Done generating links.");
     }
   }]);
