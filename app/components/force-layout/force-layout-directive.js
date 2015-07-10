@@ -68,16 +68,20 @@ angular.module('graphAlgViz.force-layout.force-layout-directive', [])
        * Updates the SVG containing the graph with any new nodes or links that have joined the
        * graph.
        */
-      function update() {
+      function updateLinks() {
+        linkSelection.attr("class", "link");
         linkSelection = linkSelection.data(linksData);
         linkSelection
           .enter()
           .insert("line", ".node")
-          .attr("class", "link");
+          .attr("class", "newLink");
         linkSelection
           .exit()
           .remove();
+        forceLayout.start();
+      }
 
+      function updateNodes() {
         nodeSelection = nodeSelection.data(nodesData);
         nodeSelection
           .enter()
@@ -88,12 +92,11 @@ angular.module('graphAlgViz.force-layout.force-layout-directive', [])
         nodeSelection
           .exit()
           .remove();
-
         forceLayout.start();
       }
 
-      $scope.$watchCollection('nodes', update);
-      $scope.$watchCollection('links', update);
+      $scope.$watchCollection('nodes', updateNodes);
+      $scope.$watchCollection('links', updateLinks);
     };
 
     return {

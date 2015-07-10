@@ -11,3 +11,8 @@
 .link {
   stroke: #999;
 }
+
+.newLink {
+  stroke: #F00;
+  stroke-width: 5px;
+}

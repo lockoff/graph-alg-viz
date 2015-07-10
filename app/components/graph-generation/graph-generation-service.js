@@ -1,11 +1,9 @@
 'use strict';
 
 angular.module('graphAlgViz.graph-generation', [])
-
   .factory('generator', ['$timeout', '$q', function ($timeout, $q) {
     return {
-      generate: generate,
-      isAnimationsPending: isAnimationsPending
+      generate: generate
     };
 
     var animationsPendingPromise = undefined;
@@ -15,7 +13,7 @@ angular.module('graphAlgViz.graph-generation', [])
       return animationsPending;
     }
 
-    function generate(nodes, links, n, p, animationInterval) {
+    function generate(nodes, links, n, p, frameDuration, finalFrameDuration) {
       nodes.length = 0;
       links.length = 0;
       animationsPending = true;
@@ -36,13 +34,12 @@ angular.module('graphAlgViz.graph-generation', [])
         for (var j = i + 1; j < n; j++) {
           if (Math.random() < p) {
             numEdges += 1;
-            animationPromises.push($timeout(generateLink(i, j), animationInterval * numEdges));
+            animationPromises.push($timeout(generateLink(i, j), frameDuration * numEdges));
           }
         }
       }
-      $q.all(animationPromises).then(function() {
-        animationsPending = false;
-      });
-      console.log("Done generating links.");
+      animationPromises.push($timeout(function() {}, frameDuration * numEdges + finalFrameDuration));
+      return $q.all(animationPromises);
     }
   }]);
+

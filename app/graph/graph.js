@@ -9,19 +9,41 @@ angular.module('graphAlgViz.graph', ['ngRoute', 'graphAlgViz.graph-generation'])
     });
   }])
 
-  .controller('GraphCtrl', ['$scope', 'generator', function ($scope, generator) {
+  .controller('GraphCtrl', ['$scope', '$q', 'generator', function ($scope, $q, generator) {
     $scope.nodes = [];
     $scope.links = [];
     $scope.n = 50;
-    $scope.p = 0.03;
+    $scope.p = 0.05;
+    $scope.maxTrials = 1000;
+    $scope.runningNumEdgesAvg = 0;
+    $scope.runTrials = runTrials;
 
-    var animationInterval = 10;
+    var frameDuration = 50;
+    var finalFrameDuration = 1000;
     console.log("n is: " + $scope.n);
     console.log("p is: " + $scope.p);
-    function generate() {
-      generator.generate($scope.nodes, $scope.links, $scope.n, $scope.p, animationInterval);
-    }
 
-    $scope.generateGraph = generate;
-    $scope.isAnimationsPending = generator.isAnimationsPending
+    function runTrials() {
+      $scope.runningNumEdgesAvg = 0;
+      var runningNumEdgesSum = 0;
+      function updateNumEdgesAvg(numTrials) {
+        runningNumEdgesSum += $scope.links.length;
+        $scope.runningNumEdgesAvg = runningNumEdgesSum / numTrials;
+      }
+      function scheduleTrial(numTrials, lastTrialPromise) {
+        return lastTrialPromise.then(function() {
+          if (numTrials > 0) {
+            updateNumEdgesAvg(numTrials);
+          }
+          return generator.generate($scope.nodes, $scope.links, $scope.n, $scope.p, frameDuration, finalFrameDuration);
+        });
+      }
+      var deferred = $q.defer();
+      var currentPromise = deferred.promise;
+      for (var i = 0; i < $scope.maxTrials; i++) {
+        currentPromise = scheduleTrial(i, currentPromise);
+      }
+      currentPromise.then(function() { updateNumEdgesAvg($scope.maxTrials); });
+      deferred.resolve();
+    }
   }]);
