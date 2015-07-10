@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('graphAlgViz.graph', ['ngRoute', 'graphAlgViz.graph-generation'])
+angular.module('graphAlgViz.graph', ['ngRoute', 'highcharts-ng', 'graphAlgViz.graph-generation'])
 
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/graph', {
@@ -18,10 +18,31 @@ angular.module('graphAlgViz.graph', ['ngRoute', 'graphAlgViz.graph-generation'])
     $scope.runningNumEdgesAvg = 0;
     $scope.runTrials = runTrials;
 
-    var frameDuration = 50;
+    var averageHistory = [61];
+    function getExpectedNumEdges() {
+      return (1/2) * $scope.n * ($scope.n - 1) * $scope.p;
+    }
+    $scope.chartOptions = {
+      useHighStocks: false,
+      options: {
+        chart: {
+          type: 'spline',
+          zoomType: 'x'
+        }
+      },
+      series: [{data: averageHistory}],
+      title: {
+        text: 'Average Number of Edges Over Trials'
+      },
+      yAxis: {
+        min: 50,
+        max: 70
+      },
+      loading: false
+    };
+    var frameDuration = 10;
     var finalFrameDuration = 1000;
-    console.log("n is: " + $scope.n);
-    console.log("p is: " + $scope.p);
+
 
     function runTrials() {
       $scope.runningNumEdgesAvg = 0;
@@ -29,6 +50,8 @@ angular.module('graphAlgViz.graph', ['ngRoute', 'graphAlgViz.graph-generation'])
       function updateNumEdgesAvg(numTrials) {
         runningNumEdgesSum += $scope.links.length;
         $scope.runningNumEdgesAvg = runningNumEdgesSum / numTrials;
+        averageHistory.push($scope.runningNumEdgesAvg);
+        //if (averageHistory.length > 10) averageHistory.shift();
       }
       function scheduleTrial(numTrials, lastTrialPromise) {
         return lastTrialPromise.then(function() {
