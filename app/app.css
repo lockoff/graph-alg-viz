@@ -16,3 +16,10 @@
   stroke: #F00;
   stroke-width: 5px;
 }
+
+.nvd3.nv-line .nvd3.nv-scatter .nv-groups .nv-point
+{
+  fill-opacity: 1;
+  stroke-opacity: 1;
+  stroke-width: 5px;
+}
