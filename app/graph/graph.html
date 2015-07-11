@@ -7,8 +7,6 @@
     Number of Nodes (n): <input type="number" ng-model="n" min="10" max="100">
     Probability (p): <input type="number" ng-model="p" min="0.01" max="1" step="0.01">
     <button ng-click="runTrials()">Generate Graph</button>
-    <p>Expected Number of Edges: {{(1/2) * (n - 1) * n * p}}</p>
-    <p>Running #Edges Avg: {{cumulativeAvg}}</p>
   </div>
 
   <div class="row">

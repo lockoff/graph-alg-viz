@@ -57,7 +57,6 @@ angular.module('graphAlgViz.graph', ['ngRoute', 'highcharts-ng', 'graphAlgViz.gr
           color: 'red',
           width: 3,
           label: {
-            text: "Expected<br>Value",
             align: "right",
             textAlign: "left"
           }
@@ -78,6 +77,8 @@ angular.module('graphAlgViz.graph', ['ngRoute', 'highcharts-ng', 'graphAlgViz.gr
       $scope.chartOptions.yAxis.min = getExpectedNumEdges() - 2 * getStdDevNumEdges();
       $scope.chartOptions.yAxis.max = getExpectedNumEdges() + 2 * getStdDevNumEdges();
       $scope.chartOptions.yAxis.plotLines[0].value = getExpectedNumEdges();
+      $scope.chartOptions.yAxis.plotLines[0].label.text = "Expected<br>Value=<br>"
+        + getExpectedNumEdges().toFixed(4);
       averageHistory.length = 0;
       $scope.cumulativeAvg = 0;
       setXAxisBounds();
