@@ -6,17 +6,9 @@ angular.module('graphAlgViz.graph-generation', [])
       generate: generate
     };
 
-    var animationsPendingPromise = undefined;
-    var animationsPending = false;
-
-    function isAnimationsPending() {
-      return animationsPending;
-    }
-
-    function generate(nodes, links, n, p, frameDuration, finalFrameDuration) {
+    function generate(nodes, links, n, p, frameDuration) {
       nodes.length = 0;
       links.length = 0;
-      animationsPending = true;
 
       // Add unlinked nodes to graph.
       for (var i = 0; i < n; i++) {
@@ -38,7 +30,7 @@ angular.module('graphAlgViz.graph-generation', [])
           }
         }
       }
-      animationPromises.push($timeout(function() {}, frameDuration * numEdges + finalFrameDuration));
+      animationPromises.push($timeout(function() {}, frameDuration * numEdges + (frameDuration * 20)));
       return $q.all(animationPromises);
     }
   }]);

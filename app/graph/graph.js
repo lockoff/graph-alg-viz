@@ -17,7 +17,14 @@ angular.module('graphAlgViz.graph', ['ngRoute', 'highcharts-ng', 'graphAlgViz.gr
     $scope.trialSetSize = 10;
     $scope.cumulativeAvg = 0;
     $scope.runTrials = runTrials;
+    $scope.frameDuration = 100;
+    $scope.animationSpeeds = [
+      {label: "Normal", value: 100},
+      {label: "2X Speed", value: 50},
+      {label: "4X Speed", value: 25}
+    ];
     var averageHistory = [];
+    var finalFrameDuration = 1000;
 
     function getExpectedNumEdges() {
       return (1 / 2) * $scope.n * ($scope.n - 1) * $scope.p;
@@ -70,8 +77,6 @@ angular.module('graphAlgViz.graph', ['ngRoute', 'highcharts-ng', 'graphAlgViz.gr
       },
       loading: false
     };
-    var frameDuration = 10;
-    var finalFrameDuration = 1000;
 
     function onGenerationParamChange() {
       $scope.chartOptions.yAxis.min = getExpectedNumEdges() - 2 * getStdDevNumEdges();
@@ -110,7 +115,7 @@ angular.module('graphAlgViz.graph', ['ngRoute', 'highcharts-ng', 'graphAlgViz.gr
       var currentPromise = deferred.promise;
       for (var i = 0; i < $scope.trialSetSize; i++) {
         currentPromise = currentPromise.then(function () {
-          return generator.generate($scope.nodes, $scope.links, $scope.n, $scope.p, frameDuration, finalFrameDuration);
+          return generator.generate($scope.nodes, $scope.links, $scope.n, $scope.p, $scope.frameDuration);
         }).then(function () {
           return updateCumulativeAvg();
         });
