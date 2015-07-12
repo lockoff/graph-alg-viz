@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('graphAlgViz.graph', ['ngRoute', 'highcharts-ng', 'graphAlgViz.graph-generation'])
+angular.module('graphAlgViz.er-graph-gen', ['ngRoute', 'highcharts-ng', 'graphAlgViz.graph-generation'])
 
   .config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/graph', {
-      templateUrl: 'graph/graph.html',
+    $routeProvider.when('/er-graph-gen', {
+      templateUrl: 'er-graph-gen/er-graph-gen.html',
       controller: 'GraphCtrl'
     });
   }])

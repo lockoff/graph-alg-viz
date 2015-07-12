@@ -1,10 +1,10 @@
 'use strict';
 
-describe('graphAlgViz.graph module', function() {
+describe('graphAlgViz.er-graph-gen module', function() {
 
-  beforeEach(module('graphAlgViz.graph'));
+  beforeEach(module('graphAlgViz.er-graph-gen'));
 
-  describe('graph controller', function(){
+  describe('er-graph-gen controller', function(){
 
     it('should ....', inject(function($controller) {
       //spec body
