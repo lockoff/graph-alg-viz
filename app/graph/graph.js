@@ -14,7 +14,7 @@ angular.module('graphAlgViz.graph', ['ngRoute', 'highcharts-ng', 'graphAlgViz.gr
     $scope.links = [];
     $scope.n = 50;
     $scope.p = 0.05;
-    $scope.maxTrials = 10;
+    $scope.trialSetSize = 10;
     $scope.cumulativeAvg = 0;
     $scope.runTrials = runTrials;
     var averageHistory = [];
@@ -86,7 +86,7 @@ angular.module('graphAlgViz.graph', ['ngRoute', 'highcharts-ng', 'graphAlgViz.gr
 
     function setXAxisBounds() {
       $scope.chartOptions.xAxis.min = 1;
-      $scope.chartOptions.xAxis.max = averageHistory.length + $scope.maxTrials;
+      $scope.chartOptions.xAxis.max = averageHistory.length + $scope.trialSetSize;
     }
 
     function updateCumulativeAvg() {
@@ -98,12 +98,15 @@ angular.module('graphAlgViz.graph', ['ngRoute', 'highcharts-ng', 'graphAlgViz.gr
     onGenerationParamChange();
     $scope.$watch('n', onGenerationParamChange);
     $scope.$watch('p', onGenerationParamChange);
+    $scope.$watch('trialSetSize', function () {
+      if (averageHistory.length == 0) setXAxisBounds();
+    });
 
     function runTrials() {
       setXAxisBounds();
       var deferred = $q.defer();
       var currentPromise = deferred.promise;
-      for (var i = 0; i < $scope.maxTrials; i++) {
+      for (var i = 0; i < $scope.trialSetSize; i++) {
         currentPromise = currentPromise.then(function () {
           return generator.generate($scope.nodes, $scope.links, $scope.n, $scope.p, frameDuration, finalFrameDuration);
         }).then(function () {
