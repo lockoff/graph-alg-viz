@@ -81,6 +81,8 @@ angular.module('graphAlgViz.graph', ['ngRoute', 'highcharts-ng', 'graphAlgViz.gr
         + getExpectedNumEdges().toFixed(4);
       averageHistory.length = 0;
       $scope.cumulativeAvg = 0;
+      $scope.nodes.length = 0;
+      $scope.links.length = 0;
       setXAxisBounds();
     }
 
