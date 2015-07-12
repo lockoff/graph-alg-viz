@@ -23,6 +23,7 @@ angular.module('graphAlgViz.graph', ['ngRoute', 'highcharts-ng', 'graphAlgViz.gr
       {label: "2X Speed", value: 50},
       {label: "4X Speed", value: 25}
     ];
+    $scope.trialsPending = false;
     var averageHistory = [];
     var finalFrameDuration = 1000;
 
@@ -111,6 +112,7 @@ angular.module('graphAlgViz.graph', ['ngRoute', 'highcharts-ng', 'graphAlgViz.gr
 
     function runTrials() {
       setXAxisBounds();
+      $scope.trialsPending = true;
       var deferred = $q.defer();
       var currentPromise = deferred.promise;
       for (var i = 0; i < $scope.trialSetSize; i++) {
@@ -120,6 +122,9 @@ angular.module('graphAlgViz.graph', ['ngRoute', 'highcharts-ng', 'graphAlgViz.gr
           return updateCumulativeAvg();
         });
       }
+      currentPromise.then(function () {
+        $scope.trialsPending = false;
+      });
       deferred.resolve();
     }
   }]);
