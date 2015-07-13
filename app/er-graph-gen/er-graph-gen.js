@@ -43,7 +43,11 @@ angular.module('graphAlgViz.er-graph-gen', ['ngRoute', 'highcharts-ng', 'graphAl
           zoomType: 'x',
           width: 500,
           height: 500,
-          marginRight: 65
+          marginRight: 65,
+          backgroundColor: "#2b3e50",
+          style: {
+            'fontFamily': '"Lato","Helvetica Neue",Helvetica,Arial,sans-serif'
+          }
         },
         legend: {
           enabled: false
@@ -51,28 +55,51 @@ angular.module('graphAlgViz.er-graph-gen', ['ngRoute', 'highcharts-ng', 'graphAl
       },
       series: [
         {
-          data: averageHistory
+          data: averageHistory,
+          color: "#5bc0de"
         }
       ],
       title: {
-        text: 'Average Number of Edges Over Generated Graphs'
+        text: 'Cumulative Average Number of Edges',
+        style: {
+          "color": "#ebebeb"
+        }
       },
       yAxis: {
         title: {
-          text: "Average Number of Edges"
+          text: "Average",
+          style: {
+            "color": "#ebebeb"
+          }
+        },
+        labels: {
+          style: {
+            "color": "#ebebeb"
+          }
         },
         plotLines: [{
-          color: 'red',
+          color: '#df691a',
           width: 3,
           label: {
             align: "right",
-            textAlign: "left"
+            textAlign: "left",
+            style: {
+              "color": "#ebebeb"
+            }
           }
         }]
       },
       xAxis: {
         title: {
-          text: "Number of Trials"
+          text: "Number of Trials",
+          style: {
+            "color": "#ebebeb"
+          }
+        },
+        labels: {
+          style: {
+            "color": "#ebebeb"
+          }
         },
         allowDecimals: false
       },

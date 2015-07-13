@@ -69,12 +69,11 @@ angular.module('graphAlgViz.force-layout.force-layout-directive', [])
        * graph.
        */
       function updateLinks() {
-        linkSelection.attr("class", "link");
         linkSelection = linkSelection.data(linksData);
         linkSelection
           .enter()
           .insert("line", ".node")
-          .attr("class", "newLink");
+          .attr("class", "link");
         linkSelection
           .exit()
           .remove();

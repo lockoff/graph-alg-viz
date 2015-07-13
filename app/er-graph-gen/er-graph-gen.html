@@ -1,16 +1,36 @@
 <div class="container">
-  <div class="page-header">
-    <h1>Generating a random graph using Erdos-Renyi Model</h1>
+    <h4>Trials of Random Graph Generation</h4>
+    <p>The Erd&#337s-R&eacutenyi model <code>G(n,p)</code> generates a random graph of <code>n</code>
+    nodes by including each of the possible <code>(n choose 2)</code> edges with probability
+    <code>p</code>. The number of edges generated is a random variable following the binomial
+    distribution, with expected value <code>(n choose 2) * p</code>. Use the controls below to run
+    graph generation trials using the Erd&#337s-R&eacutenyi model.</p>
 
-    <p>In this example we will draw the random graph G(n,p), where n is the number of nodes and
-    p is the probability, for each possible edge, of the edge being included in the graph.</p>
-    Number of Nodes (n): <input type="number" ng-model="n" min="10" max="100" ng-disabled="trialsPending">
-    Probability (p): <input type="number" ng-model="p" min="0.01" max="1" step="0.01" ng-disabled="trialsPending">
-    Number of Trials: <input type="number" ng-model="trialSetSize" min="1" step="1" ng-disabled="trialsPending">
-    Animation Speed:
-    <select ng-model="frameDuration" ng-options="speed.value as speed.label for speed in animationSpeeds" ng-disabled="trialsPending"></select>
-    <button ng-click="runTrials()" ng-disabled="trialsPending">Run Set of Trials</button>
-  </div>
+    <form class="form-horizontal">
+      <div class="form-group ">
+        <label for="numNodes" class="col-lg-2 control-label">Number of Nodes (n):</label>
+        <div class="col-xs-2">
+          <input id="numNodes" class="form-control" type="number" ng-model="n" min="10" max="100" ng-disabled="trialsPending">
+        </div>
+        <label for="trialSetSize" class="col-lg-2 control-label">Number of Trials</label>
+        <div class="col-xs-2">
+          <input id="trialSetSize" class="form-control" type="number" ng-model="trialSetSize" min="1" step="1" ng-disabled="trialsPending">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="probability" class="col-lg-2 control-label">Edge Probability (p):</label>
+        <div class="col-xs-2">
+          <input id="probability" class="form-control" type="number" ng-model="p" min="0.01" max="1" step="0.01" ng-disabled="trialsPending">
+        </div>
+        <label for="animationSpeed" class="col-lg-2 control-label">Animation Speed:</label>
+        <div class="col-xs-2">
+          <select id="animationSpeed" class="form-control" ng-model="frameDuration" ng-options="speed.value as speed.label for speed in animationSpeeds" ng-disabled="trialsPending"></select>
+        </div>
+        <div class="col-xs-2">
+          <a href="" class="btn btn-primary" ng-click="runTrials()" ng-disabled="trialsPending">Run Set of Trials</a>
+        </div>
+      </div>
+    </form>
 
   <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 col-xl-5">

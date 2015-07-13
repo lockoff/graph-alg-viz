@@ -5,21 +5,9 @@
 }
 
 .node {
-  fill: #000;
+  fill: #5bc0de;
 }
 
 .link {
-  stroke: #999;
-}
-
-.newLink {
-  stroke: #F00;
-  stroke-width: 5px;
-}
-
-.nvd3.nv-line .nvd3.nv-scatter .nv-groups .nv-point
-{
-  fill-opacity: 1;
-  stroke-opacity: 1;
-  stroke-width: 5px;
+  stroke: #df691a;
 }
