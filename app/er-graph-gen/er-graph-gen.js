@@ -46,7 +46,8 @@ angular.module('graphAlgViz.er-graph-gen', ['ngRoute', 'highcharts-ng', 'graphAl
           marginRight: 65,
           backgroundColor: "#2b3e50",
           style: {
-            'fontFamily': '"Lato","Helvetica Neue",Helvetica,Arial,sans-serif'
+            'fontFamily': '"Lato","Helvetica Neue",Helvetica,Arial,sans-serif',
+            'margin': '0px auto'
           }
         },
         legend: {

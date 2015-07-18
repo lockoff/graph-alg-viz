@@ -42,10 +42,13 @@ angular.module('graphAlgViz.force-layout.force-layout-directive', [])
       var linksData = $scope[$attrs.links];
       var forceLayout = getForceLayout($attrs, nodesData, linksData, tick);
 
+      angular.element($el[0]).attr("style",
+        "width: " + $attrs.width + "px; height: " + $attrs.height + "px;");
       var svgSelection = d3.select($el[0])
         .append("svg")
         .attr({width: $attrs.width, height: $attrs.height})
-        .attr("viewBox", "0 0 " + $attrs.width + " " + $attrs.height);
+        .attr("viewBox", "0 0 " + $attrs.width + " " + $attrs.height)
+        .attr("style", "margin: 0px auto;");
 
       var nodeSelection = svgSelection.selectAll(".node");
       var linkSelection = svgSelection.selectAll(".link");

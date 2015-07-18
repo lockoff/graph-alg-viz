@@ -1,13 +1,33 @@
 /* app css stylesheet */
 
-.container {
-  width: 80%;
-}
-
 .node {
   fill: #5bc0de;
 }
 
 .link {
   stroke: #df691a;
+}
+
+.text-container {
+  height: 39px;
+  line-height: 39px;
+}
+
+.text-container p {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.top-10 {
+  margin-top: 10px;
+}
+
+.viz-container {
+  margin: 0px auto;
+}
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .text-right-lg {
+    text-align: right;
+  }
 }
